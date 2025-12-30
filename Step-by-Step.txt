@@ -1,0 +1,69 @@
+Download and install composer 
+
+in Xampp htdocs type this on CMD->
+__________
+1. composer create-project "laravel/laravel:^10.0" AppName
+	If get problem with zip
+	  1. go to xampp php.ini(from app)
+	  2. search ;extension=zip
+	  3. remove comment (extension=zip) save and stop Apache and start again
+
+2. cd AppName
+3. php artisan serve
+--done
+
+.env (inside folder) -> local host port, database name etc change kora jay
+
+
+
+php artisan (type on cmd) -> to see details	**************
+
+Create Controllers
+_____________________
+php artisan make:controller ControllerName
+php artisan make:controller ControllerName -r		->same with more already written function
+		-> both will create a composer file on app/Http/Controllers
+
+
+Create database
+____________________
+php artisan migrate  -> ".env" te database set korar por, aita run korle 5ta table create hobe database a 
+
+php artisan make:migration create_students_table  -> Create php file for database table "\database\migrations/date_create_students_table"
+		-> to add table, go to the file and add
+		-> to update on database then again write "php artisan migrate" on cmd
+		-> it will create a students table (not this full name "create_students_table") 
+	
+
+Make Model
+-------------
+php artisan make:model Student
+
+
+or  Make Model with Controller
+---------------
+php artisan make:model Student -cr
+		-> it will make
+		-> "App\Models\Student.php"
+		-> "app\Http\Controllers\StudentController.php"
+
+
+if migration not done then
+------------
+php artisan make:model Student -mcr
+		-> it also create "database\migrations/2025_12_30_052200_create_students_table.php" with those two
+
+
+
+
+Breeze / Starter kits
+------------
+1. composer require laravel/breeze --dev
+2. php artisan breeze:install
+	-> choose any
+3. npm install (before this run (php artisan migrate))
+4. After this you will find login Register / Authentication option inbuild
+
+
+
+
