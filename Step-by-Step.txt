@@ -61,8 +61,42 @@ Breeze / Starter kits
 1. composer require laravel/breeze --dev
 2. php artisan breeze:install
 	-> choose any
+					->blade
+					->0 (PHPUnit)
 3. npm install (before this run (php artisan migrate))
 4. After this you will find login Register / Authentication option inbuild
+
+
+Template Edit (custom)
+----------------------
+1. move dist(all library folder) folder to public folder
+2. go to resources/views/auth/
+			-> change the the name of login.blade.php (as a backup)
+			-> create a new "login.blade.php" and paste the login page frontend code
+			-> change the name of fields, give form action -> action="{{ route('login') }}"
+			-> lastly give "@csrf" inside form
+3. Change dashboard
+			-> go to resources/views/ (here we found the current dashboard)
+			-> create a folder and file named "backend/dashboard.blade.php"
+			-> link the new file from "routes/web.php"
+			->find this 
+						-> Route::get('/dashboard', function () {
+							return view('dashboard');
+						})->middleware(['auth', 'verified'])->name('dashboard');
+			-> Then Change link
+			->  return view('dashboard');
+				-> with
+				return view('backend/dashboard');
+
+
+
+psr 2
+ul li in html matrix
+
+
+
+
+
 
 
 
