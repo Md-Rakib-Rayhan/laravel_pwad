@@ -88,8 +88,27 @@ Template Edit (custom)
 				-> with
 				return view('backend/dashboard');
 
+			-> linking with layouts/component
+				->  @include("backend.layouts.header")
+				->  @yield("content")
+
+				->  @extends ("backend.layouts.master")
+				->  @section("content")
+						..........
+						.........
+					@endsection
 
 
+
+
+
+
+
+
+
+
+interview question
+-----------
 psr 2
 ul li in html matrix
 
