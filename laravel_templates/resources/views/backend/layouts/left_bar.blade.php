@@ -11,8 +11,8 @@
       
       <!-- sidebar menu -->
       <ul class="sidebar-menu" data-widget="tree">
-        <li class="header">PERSONAL</li>
-        <li class="active treeview"> <a href="#"> <i class="icon-home"></i> <span>Dashboard</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
+        <!-- <li class="header">PERSONAL</li> -->
+        <!-- <li class="active treeview"> <a href="#"> <i class="icon-home"></i> <span>Dashboard</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
           <ul class="treeview-menu">
             <li class="active"><a href="index.html"><i class="fa fa-angle-right"></i> Modern</a></li>
             <li><a href="index-classic.html"><i class="fa fa-angle-right"></i> Classic</a></li>
@@ -20,8 +20,8 @@
             <li><a href="index-analytics.html"><i class="fa fa-angle-right"></i> Analytics</a></li>
             <li><a href="index-ecommerce.html"><i class="fa fa-angle-right"></i> Ecommerce</a></li>
           </ul>
-        </li>
-        <li class="treeview"> <a href="#"> <i class="icon-grid"></i> <span>Apps</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
+        </li> -->
+        <!-- <li class="treeview"> <a href="#"> <i class="icon-grid"></i> <span>Apps</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
           <ul class="treeview-menu">
             <li><a href="apps-calendar.html"><i class="fa fa-angle-right"></i> Calendar</a></li>
             <li><a href="apps-support-ticket.html"><i class="fa fa-angle-right"></i> Support Ticket</a></li>
@@ -29,15 +29,15 @@
             <li><a href="apps-contact-grid.html"><i class="fa fa-angle-right"></i> Contact  Grid</a></li>
             <li><a href="apps-contact-details.html"><i class="fa fa-angle-right"></i> Contact Detail</a></li>
           </ul>
-        </li>
-        <li class="treeview"> <a href="#"> <i class="ti-email"></i> <span>Inbox</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
+        </li> -->
+        <li class="treeview"> <a href="#"> <i class="ti-email"></i> <span>Products</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
           <ul class="treeview-menu">
-            <li><a href="apps-mailbox.html"><i class="fa fa-angle-right"></i> Mailbox</a></li>
-            <li><a href="apps-mailbox-detail.html"><i class="fa fa-angle-right"></i> Mailbox Detail</a></li>
-            <li><a href="apps-compose-mail.html"><i class="fa fa-angle-right"></i> Compose Mail</a></li>
+            <li><a href="/category"><i class="fa fa-angle-right"></i> All Products</a></li>
+            <li><a href="apps-mailbox-detail.html"><i class="fa fa-angle-right"></i> Add Products</a></li>
+            <li><a href="apps-compose-mail.html"><i class="fa fa-angle-right"></i> Categories</a></li>
           </ul>
         </li>
-        <li class="treeview"> <a href="#"> <i class="icon-frame"></i> <span>UI Elements</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
+        <!-- <li class="treeview"> <a href="#"> <i class="icon-frame"></i> <span>UI Elements</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
           <ul class="treeview-menu">
             <li><a href="ui-cards.html" class="active"><i class="fa fa-angle-right"></i> Cards</a></li>
             <li><a href="ui-user-card.html"><i class="fa fa-angle-right"></i> User Cards</a></li>
@@ -145,7 +145,7 @@
             </li>
             <li><a href="#"><i class="fa fa-angle-right"></i> Level One</a></li>
           </ul>
-        </li>
+        </li> -->
       </ul>
     </div>
     <!-- /.sidebar --> 

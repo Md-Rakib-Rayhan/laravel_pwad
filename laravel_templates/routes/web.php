@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+// I created
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +28,18 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    // i created
+    // Route::get('/categories', [CategoryController::class, 'index'])->name('category.all');
+    // Route::get('/categories/new', [CategoryController::class, 'create'])->name('category.new');
+    // Route::get('/categories/edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');
+    // Route::get('/categories/delete/{id}', [CategoryController::class, 'destroy'])->name('category.destroy');
+// same (but with in single line code)
+    Route::resource('category', CategoryController::class);
+                // -> just for all defult function in CategoryController
+                
+// Check on cmd "php artisan route:list"
+
 });
 
 require __DIR__.'/auth.php';

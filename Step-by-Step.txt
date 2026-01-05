@@ -67,6 +67,8 @@ Breeze / Starter kits
 4. After this you will find login Register / Authentication option inbuild
 
 
+
+
 Template Edit (custom)
 ----------------------
 1. move dist(all library folder) folder to public folder
@@ -100,11 +102,19 @@ Template Edit (custom)
 
 
 
+php artisan route:list
+		-> Find all route
 
 
 
+Set Route 		->	routes/web.php
+Database query	->	database/migration/_______.php
+Controllers		->	app/Http/________.php
+Model			-> app/Models/
 
 
+
+php artisan migrate:refresh
 
 
 interview question
