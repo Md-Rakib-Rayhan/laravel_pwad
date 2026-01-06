@@ -65,7 +65,7 @@
     <div class="content">
       <div class="card">
       <div class="card-body">
-        <h4 class="text-black"><span>Category List</span> <span class="pull-right"><button class="btn  btn-success">Add Category</button></span></h4>
+        <h4 class="text-black"><span>Category List</span> <span class="pull-right"><a href="{{route('category.create')}}" class="btn  btn-success">Add Category</a></span></h4>
         <p>Just add the base class  .</p>
         <div class="table-responsive">
           <table class="table">

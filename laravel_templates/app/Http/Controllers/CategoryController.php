@@ -33,7 +33,23 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // return "You get me";
+        // dd($request);
+        // dd($request->all()); // dd mean Dump and Die
+        // return request()->category_name;
+
+        $category = [
+            'name'=> $request->category_name
+        ] ;
+        Category::create($category);
+        // Category::insert($category); // another way to insert data (but time not auto update)
+
+        return redirect('/category');
+
+
+        // return redirect()->route('')->with('success',''); // Ai suggestion
+
+
     }
 
     /**

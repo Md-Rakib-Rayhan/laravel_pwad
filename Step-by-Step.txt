@@ -114,6 +114,56 @@ Model			-> app/Models/
 
 
 
+
+Linking by <a href>
+---------
+{{route('category.create')}}    -> (recomemded)
+{{url('category/create')}}		-> (Try to use for test purple only)
+
+css/link
+------
+href="{{url("") }}/dist/css/style.css">		(better for replace {ctrl+f} )
+or same
+href="{{url("dist/css/style.css") }}">
+href="{{asset("dist/css/style.css") }}">
+
+those return -> http://127.0.0.1:8000/dist/css/style.css
+
+
+
+
+
+Get Data (Controller)
+----------
+
+public function store(Request $request)
+{
+    // return "You get me"; // For check the currection is currect
+
+	// this two to see data and others property
+    // dd($request);
+    // dd($request->all());
+	// dd mean Dump and Die
+
+    $category = [
+            'name'=> $request->category_name // category_name == form input name
+    ] ; // get data
+
+	
+    Category::create($category); // push data, by help of model where Category is class created (by me cmd)
+
+    // Category::insert($category); // another way to insert data (but time not auto update)
+
+
+    return redirect('/category'); // after all return to this page
+}
+
+
+
+
+
+
+
 php artisan migrate:refresh
 
 
