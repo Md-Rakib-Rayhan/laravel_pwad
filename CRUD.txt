@@ -1,0 +1,29 @@
+
+
+
+Not Completed_________---__________----________--____--___--__------__--___-____
+
+
+
+____________________________________________________________________________
+For delete
+____________________________________________________________________________
+
+index view
+--------->
+										// id parameter
+<form action="{{ route('category.destroy', $cat->id) }}" method="post" style="display:inline;">
+    @csrf
+    @method('DELETE')
+    <button type="submit" class="fa fa-trash btn btn-danger" onclick="return confirm('Are you sure to delete?')"></button>
+</form>
+
+
+Controller
+----->
+
+public function destroy(Category $category)
+{
+    // return "You are in destroy method"; // test
+    $category->delete();
+}

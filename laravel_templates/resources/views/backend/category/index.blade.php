@@ -65,6 +65,11 @@
     <div class="content">
       <div class="card">
       <div class="card-body">
+
+        @if (session('success'))
+         <div class="alert alert-success">{{ session('success') }}</div>
+        @endif
+
         <h4 class="text-black"><span>Category List</span> <span class="pull-right"><a href="{{route('category.create')}}" class="btn  btn-success">Add Category</a></span></h4>
         <p>Just add the base class  .</p>
         <div class="table-responsive">
@@ -84,8 +89,17 @@
                 <th scope="row">{{ $cat->id }}</th>
                 <td>{{ $cat->name }}</td>
                 <td>
-                  <i class="fa fa-pencil btn btn-primary"></i>
-                  <i class="fa fa-trash btn btn-danger"></i>
+                  <a href="{{ route('category.edit', $cat->id) }}">
+                    <i class="fa fa-pencil btn btn-primary"></i>
+                  </a>
+
+                <form action="{{ route('category.destroy', $cat->id) }}" method="post" style="display:inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="fa fa-trash btn btn-danger" onclick="return confirm('Are you sure to delete?')"></button>
+                </form>
+
+
                 </td>
 
               </tr>

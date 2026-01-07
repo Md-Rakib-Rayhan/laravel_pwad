@@ -68,14 +68,30 @@
                 <h5 class="text-white m-b-0">User Profile</h5>
               </div>
               <div class="card-body">
+
+              <!-- @error('category_name')
+                <div class="alert alert-danger">{{ $message }}</div>
+              @enderror -->
                 
+
+              @if ($errors->any())
+                  <div class="alert alert-danger">
+                      <ul>
+                          @foreach ($errors->all() as $error)
+                              <li>{{ $error }}</li>
+                          @endforeach
+                      </ul>
+                  </div>
+              
+              @endif
+
                 <form method="post" action="{{ route('category.store') }}">
                   @csrf
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group has-feedback">
                       <label class="control-label">Category Name</label>
-                      <input class="form-control" name="category_name" placeholder="Category Name" type="text">
+                      <input class="form-control" name="category_name" value="{{ old('category_name') }}" placeholder="Category Name" type="text">
                     </div>
                   </div>
                   <div class="col-md-12">

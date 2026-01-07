@@ -38,16 +38,26 @@ class CategoryController extends Controller
         // dd($request->all()); // dd mean Dump and Die
         // return request()->category_name;
 
+        $request->validate([
+                                                   // table name - 'categories', field name ='name'
+            'category_name'=>'required|min:3|max:50|unique:categories,name'
+        ],[ // custom message
+            'category_name.required'=>'Please provide category name',
+            'category_name.min'=>'Category name must be at least 3 characters',
+            'category_name.max'=>'Category name must not be more than 50 characters',
+            'category_name.unique'=>'Category name already exists. Please choose another one'
+        ]);
+
         $category = [
             'name'=> $request->category_name
         ] ;
         Category::create($category);
         // Category::insert($category); // another way to insert data (but time not auto update)
 
-        return redirect('/category');
+        // return redirect('/category');
 
-
-        // return redirect()->route('')->with('success',''); // Ai suggestion
+        // With Session that auto deleted after one request
+        return redirect()->route('category.index')->with('success','Category Created Successfully');
 
 
     }
@@ -65,7 +75,9 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        return view('backend.category.edit');
+        // return "You are in edit method"; // test
+        // dd($category);
+        return view('backend.category.edit', compact('category'));
     }
 
     /**
@@ -73,7 +85,18 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        // dd($request->all(), $category);
+        
+        $request->validate([
+            'category_name'=>'required|min:3|max:50|unique:categories,name'
+        ]);
+
+        $data = [
+            'name'=> $request->category_name
+        ];
+        
+        $category->update($data);
+        return redirect()->route('category.index')->with('success','Updated Successfully');
     }
 
     /**
@@ -81,6 +104,8 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        // return "You are in destroy method"; // test
+        $category->delete();
+        return redirect()->route('category.index')->with('success','Deleted Successfully');
     }
 }

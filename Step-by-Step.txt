@@ -115,6 +115,27 @@ Model			-> app/Models/
 
 
 
+Set Route on routes/web.php
+-------------
+    // Route::get('/categories', [CategoryController::class, 'index'])->name('category.all');
+    // Route::get('/categories/new', [CategoryController::class, 'create'])->name('category.new');
+    // Route::get('/categories/edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');
+    // Route::get('/categories/delete/{id}', [CategoryController::class, 'destroy'])->name('category.destroy');
+	
+// same (but with in single line code)
+    Route::resource('category', CategoryController::class);
+                // -> just for all defult function in CategoryController
+                
+To see all route do this on cmd->
+			-> php artisan route:list
+		
+
+
+
+
+
+
+
 Linking by <a href>
 ---------
 {{route('category.create')}}    -> (recomemded)
@@ -157,6 +178,138 @@ public function store(Request $request)
 
     return redirect('/category'); // after all return to this page
 }
+
+
+
+
+After Insertion of data, set one time success message
+---------------
+
+Controller
+----->
+return redirect()->route('category.index')->with('success','Category Created Successfully')
+
+index
+----->
+@if (session('success'))
+         <div class="alert alert-success">{{ session('success') }}</div>
+@endif
+
+// Session willl auto delete after single view (in index)
+
+
+Also if need Validation
+----------------
+Controller
+----->
+$request->validate([
+												// table name, field name
+    'category_name'=>'required|min:3|max:50|unique:categories,name'
+]);
+
+--- or with custom error message
+$request->validate([
+            'category_name'=>'required|min:3|max:50|unique:categories,name'
+        ],[ // custom message
+            'category_name.required'=>'Please provide category name',
+            'category_name.min'=>'Category name must be at least 3 characters',
+            'category_name.max'=>'Category name must not be more than 50 characters',
+            'category_name.unique'=>'Category name already exists. Please choose another one'
+        ]);
+
+
+
+in form page
+------>
+<!-- @error('category_name')
+	<div class="alert alert-danger">{{ $message }}</div>
+@enderror -->
+                
+
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+              
+@endif
+
+
+
+
+
+For delete
+----------------------------
+
+index view
+--------->
+										// id parameter
+<form action="{{ route('category.destroy', $cat->id) }}" method="post" style="display:inline;">
+    @csrf
+    @method('DELETE')
+    <button type="submit" class="fa fa-trash btn btn-danger" onclick="return confirm('Are you sure to delete?')"></button>
+</form>
+
+
+Controller
+----->
+
+public function destroy(Category $category)
+{
+    // return "You are in destroy method"; // test
+    $category->delete();
+}
+
+
+
+
+update
+-----------------------------------
+Controller
+-------->
+    public function update(Request $request, Category $category)
+    {
+        // dd($request->all(), $category);
+        
+        $request->validate([
+            'category_name'=>'required|min:3|max:50|unique:categories,name'
+        ]);
+
+        $data = [
+            'name'=> $request->category_name
+        ];
+        
+        $category->update($data);
+        return redirect()->route('category.index')->with('success','Updated Successfully');
+    }
+
+
+Edit view page
+-------->
+ <form method="post" action="{{ route('category.update', $category->id) }}">
+                  @csrf
+                  @method('PUT')
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group has-feedback">
+                      <label class="control-label">Category Name</label>
+                      <input class="form-control" value="{{ !old('category_name') ? $category->name : old('category_name') }}" name="category_name" placeholder="Category Name" type="text">
+                      
+
+
+
+
+
+
+
+
+
+debugber
+----------------------
+composer require barryvdh/laravel-debugbar --dev
 
 
 
