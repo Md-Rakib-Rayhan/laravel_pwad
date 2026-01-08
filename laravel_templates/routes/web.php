@@ -1,9 +1,12 @@
 <?php
 
+
 use App\Http\Controllers\ProfileController;
+use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 // I created
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +42,8 @@ Route::middleware('auth')->group(function () {
                 // -> just for all defult function in CategoryController
                 
 // Check on cmd "php artisan route:list"
+
+    Route::resource('product', ProductController::class);
 
 });
 

@@ -55,6 +55,14 @@ php artisan make:model Student -mcr
 
 
 
+give fillable property for newly maded model (for insert data on mysql)
+----------------
+protected $fillable = [
+        'name', // table field name
+        'email',
+        'password'
+    ];
+
 
 Breeze / Starter kits
 ------------
@@ -318,7 +326,8 @@ composer require barryvdh/laravel-debugbar --dev
 
 
 php artisan migrate:refresh
-
+    -> Remove all data, table from database
+    -> then need to register, login again
 
 interview question
 -----------
