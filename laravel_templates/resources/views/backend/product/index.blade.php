@@ -97,7 +97,8 @@
                 <td>{{ $product->price }}</td>
                 <td>{{ $product->sku }}</td>
                 <td>{{ $product->stock }}</td>
-                <td>{{ $product->category_id }}</td>
+                <!-- <td>{{ $product->category_id }}</td> -->
+                <td>{{ $product->category->name }}</td>
                 <!-- <td>{{ $product->image_url }}</td> -->
                 <td style="display: flex; justify-content: space-between;">
                   <a class="mr-3" href="{{ route('product.edit', $product->id) }}">

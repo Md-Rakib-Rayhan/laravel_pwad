@@ -321,7 +321,10 @@ composer require barryvdh/laravel-debugbar --dev
 
 
 
-
+php artisan make:model Admin -mcr
+-> add table field on database
+php artisan migrate
+php artisan make:controller Auth/Admin/RegisterController
 
 
 
