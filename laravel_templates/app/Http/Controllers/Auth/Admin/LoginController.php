@@ -3,36 +3,37 @@
 namespace App\Http\Controllers\Auth\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Providers\RouteServiceProvider;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\RedirectResponse;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Validation\ValidationException;
-
 
 
 class LoginController extends Controller
 {
     public function create(){
-          return view('auth.admin_login');
+        return view ('auth.admin_login');
     }
 
-     public function store(Request $request): RedirectResponse
+     public function store(Request $request)
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.Admin::class],
-            'password' => ['required', 'confirmed', 'min:8'],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255'],
+            'password' => ['required', 'string'],
         ]);
 
-        $admin = Admin::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
 
-        Auth::guard('admin')->login($admin);
+        if(! Auth::guard('admin')->attempt($request->only('email', 'password'), $request->boolean('remember')))
+        {
+            throw ValidationException::withMessages([
+                'email' => trans('auth.failed'),
+            ]);
+        }
 
-        return redirect(RouteServiceProvider::ADMIN_DASHBOARD);
+        $request->session()->regenerate();
+
+        return redirect()->intended(RouteServiceProvider::ADMIN_DASHBOARD);
     }
+
 }

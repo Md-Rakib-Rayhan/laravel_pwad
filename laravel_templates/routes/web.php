@@ -59,9 +59,10 @@ Route::middleware('guest:admin')->prefix('admin')->group( function () {
 
 Route::middleware('auth:admin')->prefix('admin')->group( function () {
 
-    //Route::post('logout', [App\Http\Controllers\Auth\Admin\LoginController::class, 'destroy'])->name('admin.logout');
+    Route::post('logout', [App\Http\Controllers\Auth\Admin\LoginController::class, 'destroy'])->name('admin.logout');
 
-    Route::view('/dashboard','admin.dashboard');
+                //"admin/dashboard" aita pabe karon "admin" upore deya ase "prefix('admin')"
+    Route::view('/dashboard','backend.admin_dashboard');
 
 });
 

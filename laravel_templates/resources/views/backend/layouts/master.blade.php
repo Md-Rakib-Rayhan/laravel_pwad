@@ -7,6 +7,12 @@
 <div class="wrapper boxed-wrapper">
   
 <!-- Header -->
+<!-- @//dd(auth()) -->
+<!-- @//dd(auth()->user()) -->
+<!-- @//dd(auth()->guard()) -->
+
+@dd(auth()->guard('admin'))
+
  @include("backend.layouts.header")
 <!-- End Header -->
 
