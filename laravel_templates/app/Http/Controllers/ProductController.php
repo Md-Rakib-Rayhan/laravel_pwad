@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use App\Models\Product;
+use App\Models\product;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class ProductController extends Controller
 {
@@ -14,8 +14,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::all(); // Retrieve all products from the database
-        return view("backend.product.index", compact('products')); // Pass products to the view
+        $data = product::all();
+        return view('backend.product.index',compact('data'));
     }
 
     /**
@@ -24,7 +24,7 @@ class ProductController extends Controller
     public function create()
     {
         $data = Category::all();
-        return view("backend.product.create", compact('data'));
+        return view('backend.product.create', compact('data'));
     }
 
     /**
@@ -32,44 +32,54 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-         $request->validate([
-            'product_name'=>'required|min:3|max:50',
-            'sku'=>'required|unique:products,sku',
-            'stock'=>'required|integer|min:0|max:6999',
-            'price'=>'required|numeric',
-            'category_id' => 'required',
-            'image_url' => 'mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
+         //  Validation
+        $request->validate(
+            [
+                'prod_name'=> 'required|max:10|min:3',
+                'price' => 'required',
+                'stock' => 'required',
+                'category' => 'required',
+                'sku' => 'required',
+                'image' => 'required|image|mimes:jpeg,png,jpj,pdf|max:2048',
 
-        // dd($request->image_url);
+            ],
+            // [
+            //     'required'=> 'Product name is required',
+            //     'max' => 'Product name must be 3 to 10 letter',
+            //     'min' => 'Product name must be 3 to 10 letter',
+                
 
-        $product_image = '';
-        if($request->image_url==null){
-            $product_image = 'dist/img/product_photo/No_Image_Available.jpg';
-        }else{
-            // $product_image = $request->file('image_url')->store('products','public');
-            $product_image = request()->image_url->move('dist/img/product_photo', $request->image_url->getClientOriginalName());
-        } //originalName
+            // ]
+        );
 
-        $data = [
-            'name'=> $request->product_name,
-            'description'=> $request->product_description,
-            'sku'=> $request->sku,
-            'stock'=> $request->stock,
-            'price'=> $request->price,
-            'category_id'=> $request->category_id,
-            'image_url'=> $product_image
-        ] ;
-        Product::create($data);
+        $product_img = '';
+        if($request->image==null){
+            $product_img='product_image/noimage.jpg';
+        }
+        else{
+            $product_img=request()->image->move('product_image',
+            $request->image->getClientoriginalName());
+        }
+        // dd($product_img);
 
-        return redirect()->route('product.index')->with('success','Product Added Successfully');
-
+        // Data......
+        $data =[
+            'categories_id'=>$request->category,
+            'name'=>$request->prod_name,
+            'description'=>$request->description,
+            'sku'=>$request->sku,
+            'stock'=>$request->	stock,
+            'price'=>$request->price,
+            'image'=>$product_img              //$request->image
+        ];
+        product::create($data);
+        return redirect()->route('product.index')->with('success', 'Product added');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Product $product)
+    public function show(product $product)
     {
         //
     }
@@ -77,7 +87,7 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Product $product)
+    public function edit(product $product)
     {
         //
     }
@@ -85,7 +95,7 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, product $product)
     {
         //
     }
@@ -93,16 +103,12 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Product $product)
+    public function destroy(product $product)
     {
-        $product_image_path = public_path($product->image_url);
-
-        if (File::exists($product_image_path) && $product->image_url != 'dist/img/product_photo/No_Image_Available.jpg') {
-            unlink($product_image_path);
-            // File::delete($product_image_path); //same
-        }
-
+        //  dd($product->image);
+         $imagePath=public_path($product->image);
+         unlink($imagePath);
         $product->delete();
-        return redirect()->route('product.index')->with('success','Deleted Successfully');
+        return redirect()->route('product.index')->with('success','Successfully Deleted');
     }
 }

@@ -1,0 +1,69 @@
+<?php
+
+
+use App\Http\Controllers\ProfileController;
+use App\Models\Product;
+use Illuminate\Support\Facades\Route;
+// I created
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
+|
+*/
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/dashboard', function () {
+    return view('backend/dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    // i created
+    // Route::get('/categories', [CategoryController::class, 'index'])->name('category.all');
+    // Route::get('/categories/new', [CategoryController::class, 'create'])->name('category.new');
+    // Route::get('/categories/edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');
+    // Route::get('/categories/delete/{id}', [CategoryController::class, 'destroy'])->name('category.destroy');
+// same (but with in single line code)
+    Route::resource('category', CategoryController::class);
+                // -> just for all defult function in CategoryController
+                
+// Check on cmd "php artisan route:list"
+
+    Route::resource('product', ProductController::class);
+
+});
+
+Route::middleware('guest:admin')->prefix('admin')->group( function () {
+
+    Route::get('login', [App\Http\Controllers\Auth\Admin\LoginController::class, 'create'])->name('admin.login');
+    Route::post('login', [App\Http\Controllers\Auth\Admin\LoginController::class, 'store']);
+
+    //Route::get('register', [App\Http\Controllers\Auth\Admin\RegisterController::class, 'create'])->name('admin.register');
+    //Route::post('register', [App\Http\Controllers\Auth\Admin\RegisterController::class, 'store']);
+
+});
+
+Route::middleware('auth:admin')->prefix('admin')->group( function () {
+
+    Route::post('logout', [App\Http\Controllers\Auth\Admin\LoginController::class, 'destroy'])->name('admin.logout');
+
+                //"admin/dashboard" aita pabe karon "admin" upore deya ase "prefix('admin')"
+    Route::view('/dashboard','backend.admin_dashboard');
+
+});
+
+require __DIR__.'/auth.php';

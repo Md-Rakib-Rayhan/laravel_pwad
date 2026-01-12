@@ -1,12 +1,10 @@
 <?php
 
-
-use App\Http\Controllers\ProfileController;
-use App\Models\Product;
-use Illuminate\Support\Facades\Route;
-// I created
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
+use App\Models\product;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,45 +22,58 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('backend/dashboard');
+    return view('backend.dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
-    // i created
-    // Route::get('/categories', [CategoryController::class, 'index'])->name('category.all');
-    // Route::get('/categories/new', [CategoryController::class, 'create'])->name('category.new');
-    // Route::get('/categories/edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');
-    // Route::get('/categories/delete/{id}', [CategoryController::class, 'destroy'])->name('category.destroy');
-// same (but with in single line code)
+    // Route::get('/categorys', [CategoryController::class, 'index'])->name('category.all');
+    // Route::get('/Category/new', [CategoryController::class, 'create'])->name('category.new');
+    // Route::get('/category/edit/{id}',[CategoryController::class, 'edit'])->name('category.edit');
+    // Route::get('/category/delete/{id}',[CategoryController::class, 'destroy'])->name('category.delete');
     Route::resource('category', CategoryController::class);
-                // -> just for all defult function in CategoryController
-                
-// Check on cmd "php artisan route:list"
-
-    Route::resource('product', ProductController::class);
-
+    Route::resource('product' , ProductController::class);
 });
+
+// admin login, logout, registration
 
 Route::middleware('guest:admin')->prefix('admin')->group( function () {
 
     Route::get('login', [App\Http\Controllers\Auth\Admin\LoginController::class, 'create'])->name('admin.login');
-    Route::post('login', [App\Http\Controllers\Auth\Admin\LoginController::class, 'store']);
+     Route::post('login', [App\Http\Controllers\Auth\Admin\LoginController::class, 'store']);
 
-    //Route::get('register', [App\Http\Controllers\Auth\Admin\RegisterController::class, 'create'])->name('admin.register');
-    //Route::post('register', [App\Http\Controllers\Auth\Admin\RegisterController::class, 'store']);
+    // Route::get('register', [App\Http\Controllers\Auth\Admin\RegisterController::class, 'create'])->name('admin.register');
+    // Route::post('register', [App\Http\Controllers\Auth\Admin\RegisterController::class, 'store']);
 
 });
 
 Route::middleware('auth:admin')->prefix('admin')->group( function () {
 
-    Route::post('logout', [App\Http\Controllers\Auth\Admin\LoginController::class, 'destroy'])->name('admin.logout');
+     Route::post('logout', [App\Http\Controllers\Auth\Admin\LoginController::class, 'destroy'])->name('admin.logout');
 
-                //"admin/dashboard" aita pabe karon "admin" upore deya ase "prefix('admin')"
-    Route::view('/dashboard','backend.admin_dashboard');
+     Route::view('/dashboard','backend.admin_dashboard');
+
+});
+
+//manager login, logout, 
+
+Route::middleware('guest:manager')->prefix('manager')->group( function () {
+
+    Route::get('login', [App\Http\Controllers\Auth\Manager\LoginController::class, 'create'])->name('manager.login');
+     Route::post('login', [App\Http\Controllers\Auth\Manager\LoginController::class, 'store']);
+
+    // Route::get('register', [App\Http\Controllers\Auth\Manager\RegisterController::class, 'create'])->name('Manager.register');
+    // Route::post('register', [App\Http\Controllers\Auth\Manager\RegisterController::class, 'store']);
+
+});
+
+Route::middleware('auth:manager')->prefix('manager')->group( function () {
+
+     Route::post('logout', [App\Http\Controllers\Auth\Manager\LoginController::class, 'destroy'])->name('manager.logout');
+
+     Route::view('/dashboard','backend.manager_dashboard');
 
 });
 

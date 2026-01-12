@@ -1,15 +1,15 @@
-<header class="main-header"> 
+ <header class="main-header"> 
     <!-- Logo --> 
     <a href="index.html" class="logo blue-bg"> 
     <!-- mini logo for sidebar mini 50x50 pixels --> 
     <span class="logo-mini"><img src="dist/img/logo-small.png" alt=""></span> 
     <!-- logo for regular state and mobile devices --> 
-    <span class="logo-lg"><img src="dist/img/logo.png" alt=""></span> </a> 
+    <span class="logo-lg"><img src="dist/img/logo.png" alt=""></span>  </a> 
     <!-- Header Navbar -->
     <nav class="navbar blue-bg navbar-static-top"> 
       <!-- Sidebar toggle button-->
       <ul class="nav navbar-nav pull-left">
-        <li><a class="sidebar-toggle" data-toggle="push-menu" href=""></a> </li>
+        <li><a class="sidebar-toggle" data-toggle="push-menu" href=""> </a> </li>
       </ul>
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
@@ -102,11 +102,10 @@
               <li role="separator" class="divider"></li>
               <li>
                 
-                <form action="{{ route('logout') }}" method="post">
+                <form action="{{route ('logout')}}" method="post">
+                  <button type="submit" ><i class="fa fa-power-off"></i> Logout</button>
                   @csrf
-                  <button type="submit"><i class="fa fa-power-off"></i> Logout</button>
                 </form>
-
               </li>
             </ul>
           </li>

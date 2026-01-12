@@ -332,6 +332,19 @@ php artisan migrate:refresh
     -> Remove all data, table from database
     -> then need to register, login again
 
+
+
+
+seeder -> Check more later
+--All Prompt
+
+php artisan db:seed
+
+php artisan make:factory
+        -> Name
+
+
+
 interview question
 -----------
 psr 2

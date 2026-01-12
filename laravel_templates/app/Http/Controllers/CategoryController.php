@@ -14,9 +14,8 @@ class CategoryController extends Controller
     {
 
         $cats = Category::all();
-        // dd($cats); // for text
-        
-        // return "asi vai";
+            // dd($cats);
+
         return view('backend.category.index', compact('cats'));
     }
 
@@ -33,33 +32,27 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        // return "You get me";
-        // dd($request);
-        // dd($request->all()); // dd mean Dump and Die
-        // return request()->category_name;
+        //  Validation
+        $request->validate(
+            [
+                'cat_name'=> 'required|max:10|min:3|unique:categories,name'
+            ],
+            [
+                'required'=> 'Category name is required',
+                'max' => 'Category name must be 3 to 10 letter',
+                'min' => 'Category name must be 3 to 10 letter',
+                'unique' => 'Category name is already taken'
 
-        $request->validate([
-                                                   // table name - 'categories', field name ='name'
-            'category_name'=>'required|min:3|max:50|unique:categories,name'
-        ],[ // custom message
-            'category_name.required'=>'Please provide category name',
-            'category_name.min'=>'Category name must be at least 3 characters',
-            'category_name.max'=>'Category name must not be more than 50 characters',
-            'category_name.unique'=>'Category name already exists. Please choose another one'
-        ]);
+            ]
+        );
 
-        $category = [
-            'name'=> $request->category_name
-        ] ;
+
+        // Data......
+        $category =[
+            'name'=>$request->cat_name
+        ];
         Category::create($category);
-        // Category::insert($category); // another way to insert data (but time not auto update)
-
-        // return redirect('/category');
-
-        // With Session that auto deleted after one request
-        return redirect()->route('category.index')->with('success','Category Created Successfully');
-
-
+        return redirect()->route('category.index')->with('success', 'Category added');
     }
 
     /**
@@ -75,9 +68,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        // return "You are in edit method"; // test
-        // dd($category);
-        return view('backend.category.edit', compact('category'));
+        return view('backend.category.edit',compact('category'));
     }
 
     /**
@@ -85,18 +76,25 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        // dd($request->all(), $category);
-        
-        $request->validate([
-            'category_name'=>'required|min:3|max:50|unique:categories,name'
-        ]);
 
-        $data = [
-            'name'=> $request->category_name
+          $request->validate(
+            [
+                'cat_name'=> 'required|max:10|min:3|unique:categories,name'
+            ],
+            [
+                'required'=> 'Category name is required',
+                'max' => 'Category name must be 3 to 10 letter',
+                'min' => 'Category name must be 3 to 10 letter',
+                'unique' => 'Category name is already taken'
+
+            ]
+        );
+        //dd($request);
+        $data=[
+            'name'=>$request->cat_name
         ];
-        
         $category->update($data);
-        return redirect()->route('category.index')->with('success','Updated Successfully');
+        return redirect()->route('category.index')->with('success','Successfully Updeted');
     }
 
     /**
@@ -104,8 +102,8 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        // return "You are in destroy method"; // test
+        // dd($category);
         $category->delete();
-        return redirect()->route('category.index')->with('success','Deleted Successfully');
+        return redirect()->route('category.index')->with('success','Successfully Deleted');
     }
 }

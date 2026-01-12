@@ -1,36 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-<!-- Head -->
- @yield("head")
-<!-- End Head -->
+@yield("head")
 <body class="skin-blue sidebar-mini">
 <div class="wrapper boxed-wrapper">
-  
-<!-- Header -->
-<!-- @//dd(auth()) -->
-<!-- @//dd(auth()->user()) -->
-<!-- @//dd(auth()->guard()) -->
+<!-- header-->
 
-@dd(auth()->guard('admin'))
-
- @include("backend.layouts.header")
-<!-- End Header -->
-
-
+  @if(Auth::guard('web')->check())
+  @include ("backend.layouts.header")
+  @elseif(Auth::guard('admin')->check())
+  @include ("backend.layouts.adminHeader")
+  @elseif(Auth::guard('manager')->check())
+  @include ("backend.layouts.managerHeader")
+  @endif
+<!--/ header-->
   <!-- Left side column. contains the logo and sidebar -->
-<!-- left bar -->
- @include("backend.layouts.left_bar")
-<!-- End left bar -->
 
-<!-- Main Contant -->
+    @if(Auth::guard('web')->check())
+  @include ("backend.layouts.left_bar")
+  @elseif(Auth::guard('admin')->check())
+  @include ("backend.layouts.adminLeft_bar")
+  @elseif(Auth::guard('manager')->check())
+  @include ("backend.layouts.managerLeft_bar")
+  @endif
+   
+  <!-- Left side column. contains the logo and sidebar -->
+  
   <!-- Content Wrapper. Contains page content -->
-@yield("content")
+  @yield("content")
   <!-- /.content-wrapper -->
-<!-- End Main Contant -->
-
-  <!-- Footer -->
-   @include("backend.layouts.footer")
-  <!-- End Footer -->
+  <!-- footer -->
+   @include ("backend.layouts.footer")
+  <!-- /footer -->
   
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark"> 
@@ -48,8 +48,8 @@
 </div>
 <!-- ./wrapper --> 
 
-<!-- Script --> 
-@yield("script")
-<!--End Script-->
+<!-- jQuery 3 --> 
+@yield("scripts")
+<!--End of Tawk.to Script-->
 </body>
 </html>

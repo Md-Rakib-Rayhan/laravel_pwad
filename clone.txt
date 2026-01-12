@@ -1,25 +1,26 @@
 5️⃣ How to run the project after cloning on another PC
-Step 1: Clone
+Step 1: Clone -->
 git clone https://github.com/USERNAME/REPO_NAME.git
 cd REPO_NAME
 
-Step 2: Install PHP dependencies
+Step 2: Install PHP dependencies -->
 composer install
+            ->if get error then "composer update" then "composer install"
 
-Step 3: Install frontend dependencies
+Step 3: Install frontend dependencies -->
 npm install
 
-Step 4: Create .env
-cp .env.example .env
+Step 4: Create .env -->
+cp .env.example .env        Or      copy .env.example .env
 
 
 (or manually copy .env.example and rename it)
 
-Step 5: Generate app key
+Step 5: Generate app key -->
 php artisan key:generate
 
-Step 6: Run migrations (if using database)
+Step 6: Run migrations (if using database) -->
 php artisan migrate
 
-Step 7: Run the project
+Step 7: Run the project -->
 php artisan serve
