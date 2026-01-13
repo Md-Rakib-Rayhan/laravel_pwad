@@ -55,6 +55,12 @@ php artisan make:model Student -mcr
 
 
 
+check all migration data/field (available on database (on migrations table) after migrate)
+-----------
+php artisan migrate:status
+
+
+
 give fillable property for newly maded model (for insert data on mysql)
 ----------------
 protected $fillable = [
@@ -336,13 +342,26 @@ php artisan migrate:refresh
 
 
 seeder -> Check more later
---All Prompt
-
+---------------------All Prompt
 php artisan db:seed
-
 php artisan make:factory
         -> Name
 
+
+
+topic
+--------------
+getter (accessor), setter
+
+others
+---
+heroku
+
+
+laravel route cache clear -> check later
+-------
+php artisan route:clear
+php artisan optimize:clear (not only route, Clear all caches  (config, view, general application cache))
 
 
 interview question
