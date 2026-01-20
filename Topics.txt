@@ -1,0 +1,10 @@
+Template Edit
+Authentication, Breeze / Starter kits
+Multi Authentication (Different Table)
+Create Controllers, database, model (migration, migrate)
+Route (Linking Many way)
+CRUD
+debugber
+seeder
+getter (accessor), setter
+Toastr Notification
