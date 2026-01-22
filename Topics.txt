@@ -8,3 +8,4 @@ debugber
 seeder
 getter (accessor), setter
 Toastr Notification
+Yajra Ajax
