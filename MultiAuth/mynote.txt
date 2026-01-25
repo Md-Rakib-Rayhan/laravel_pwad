@@ -8,4 +8,37 @@
 5. copy everything(just change the User class to Admin) (on model)
 6. add "protected $guard = 'admin';" in Admin model
 7. add "protected $guard = 'web';" in User model
-8. 
+
+8. on config/auth.php make providers & guards for Admin(by coping user)
+9. Copy the auth.php on routes and and make admin-auth.php
+10. add "require __DIR__.'/admin-auth.php';" in last line in routes/web.php
+11. add at last before "Route::post('logout'...)" on admin-auth.php
+
+    Route::get('/dashboard', function () {
+    return view('dashboard');
+    })->middleware(['verified'])->name('dashboard');
+
+    
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+
+12. Create a Admin Folder on Controllers folder
+13. Create Auth folder on that folder
+14. copy "AuthenticatedSessionController.php" & "RegisteredUserController.php" from Categoryontroller/Auth And paste on New Auth we just made
+15. copy "ProfileController.php" from Controller And paste it on Admin
+
+
+16. in this 3 file we changed some data (comment out previous data)
+17. link those 3 file on routes/admin-auth.php
+
+
+18. Create a admin folder insite views
+19 And then copy those folder "auth, layouts, profile" and this file "deshboard"
+
+20. on views we make some change on welcome.blade.php
+21. Also make some changes on admin-auth.php on routes
+        -> Admin pray hoise aro baki ase(migrate kora hoynai tai login hobe na)
+        -> video 20.00 min
+
