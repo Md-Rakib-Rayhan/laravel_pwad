@@ -1,0 +1,11 @@
+1. composer require laravel/breeze --dev
+2. php artisan breeze:install
+	-> choose any
+					->blade
+					->1
+3. php artisan make:model Admin -m
+4. copy table from user to Admin (database)
+5. copy everything(just change the User class to Admin) (on model)
+6. add "protected $guard = 'admin';" in Admin model
+7. add "protected $guard = 'web';" in User model
+8. 
