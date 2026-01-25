@@ -11,6 +11,6 @@ Toastr Notification
 Yajra Ajax
 Socialite (login with google facebook)
                 -> https://www.itsolutionstuff.com/post/laravel-12-socialite-login-with-github-account-exampleexample.html
-
+Laravel + React
 
                 
