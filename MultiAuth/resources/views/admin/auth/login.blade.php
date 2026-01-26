@@ -1,8 +1,16 @@
 <x-guest-layout>
     <!-- Session Status -->
+
+    <!-- I Change copy from admin/deshboard -->
+    <h2 class="font-semibold text-xl text-gray-800 leading-tight text-center">
+            {{ __('Admin login') }}
+    </h2>
+    <!-- I Change End -->
+
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <form method="POST" action="{{ route('login') }}">
+    <!-- <form method="POST" action="{{ route('login') }}"> -->
+    <form method="POST" action="{{ route('admin.login') }}">
         @csrf
 
         <!-- Email Address -->

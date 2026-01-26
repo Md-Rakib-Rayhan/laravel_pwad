@@ -1,5 +1,15 @@
 <x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
+
+
+    <!-- I Change copy from admin/deshboard -->
+    <h2 class="font-semibold text-xl text-gray-800 leading-tight text-center">
+            {{ __('Admin login') }}
+    </h2>
+    <!-- I Change End -->
+
+
+    <!-- <form method="POST" action="{{ route('register') }}"> -->
+    <form method="POST" action="{{ route('admin.register') }}">
         @csrf
 
         <!-- Name -->

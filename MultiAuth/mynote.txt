@@ -39,6 +39,30 @@
 
 20. on views we make some change on welcome.blade.php
 21. Also make some changes on admin-auth.php on routes
-        -> Admin pray hoise aro baki ase(migrate kora hoynai tai login hobe na)
-        -> video 20.00 min
+
+
+22. Some changes on those files
+        views/admin/auth/login.blade.php
+        views/admin/auth/register.blade.php
+        views/admin/layouts/app.blade.php
+
+23. Copy LoginRequest.php(on Http/Requests/auth) and named it AdminLoginRequest.php And change some data
+24. link that file on Controller/Admin/Auth/AuthenticatedSessionController.php
+        -> replace this one "use App\Http\Requests\Auth\LoginRequest;"
+        -> with this "use App\Http\Requests\Auth\AdminLoginRequest;"
+
+
+25. on app/View/Components copy AppLayout.php and named AdminAppLayout.php and make some changes
+26. "<x-admin-app-layout>" this add on views/admin/deshboard.blade.php against "<x-app-layout>"
+27. Also make some changes on views/admin/layouts/navigation.blade.php
+
+28. Admin and user working suceessfully
+
+-------------------- 30.48min
+
+
+
+
+
+
 
