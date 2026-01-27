@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Admin\Auth\RegisteredUserController;
 //new add
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\Auth\PasswordController as AdminPasswordController;
 //end new add
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
@@ -60,6 +61,8 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
     // Route::post('confirm-password', [ConfirmablePasswordController::class, 'store']);
 
     // Route::put('password', [PasswordController::class, 'update'])->name('password.update');
+
+    Route::put('password', [AdminPasswordController::class, 'update'])->name('password.update');
 
     Route::get('/dashboard', function () {
     // return view('dashboard');
