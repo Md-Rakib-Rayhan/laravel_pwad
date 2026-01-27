@@ -82,7 +82,23 @@ For teacher
 
 
 
-Authentication done properly but not the profile and others
+profile edit fix by linking properly on 
+1. views/admin/partials/update-profile-information-form.blade.php
+                -> just added "admin.profile.update" instade of "profile.update"
+2. Controller/Admin/ProfileController.php
+                -> just added "admin.profile.edit" instade of "profile.edit"
 
-1. 
+Same with other on views/teacher/partials/delete-user-form.blade.php
+
+1. views/teacher/partials/update-profile-information-form.blade.php
+                -> just added "teacher.profile.update" instade of "profile.update"
+2. Controller/Teacher/ProfileController.php
+                -> just added "teacher.profile.edit" instade of "profile.edit"
+
+Same with other on views/teacher/partials/delete-user-form.blade.php
+
+
+
+Some problem still left like forget password, change password
+
 
