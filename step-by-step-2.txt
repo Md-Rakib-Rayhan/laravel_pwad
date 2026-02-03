@@ -4,3 +4,26 @@ cd anyname
 npm install && npm run build
 composer run dev
 
+
+
+same with different approach laravel 10
+--------
+composer create-project "laravel/laravel:^10.0" anyname
+cd anyname
+composer require laravel/breeze --dev
+php artisan breeze:install
+            -> react
+            -> none
+            -> 0        (PHPUnit)
+php artisan migrate
+npm install
+npm run dev
+php artisan serve
+
+if cdn not work properly for bootstrap->
+npm install bootstrap@v5.3.8
+        -> paste this on app.jsx
+        -> import 'bootstrap/dist/css/bootstrap.min.css';
+
+
+
