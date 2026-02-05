@@ -1,0 +1,42 @@
+npm install
+npm run build
+
+move all (assets, build, .htaccess, favicon.ico, index.php, robots.txt) from public to root folder
+
+
+change the location of index.php 
+------------------->
+require __DIR__.'/../vendor/autoload.php';
+$app = require_once __DIR__.'/../bootstrap/app.php';
+
+to 
+
+require __DIR__.'/vendor/autoload.php';
+$app = require_once __DIR__.'/bootstrap/app.php';
+
+
+just to testing
+-------------
+Now open the xampp and start Apache, MySQL
+And open the file on localhost with (root main projct folder link)
+Check Everyting is ok or not
+
+
+
+on hostinger
+-----------
+upload all
+
+
+In windows
+----------
+open PuTTy (if not found then Download)
+give Host name or ip addresss and Port then click open
+            -> Form hostinger Advance > SSH Access
+give username or login and pass to enter
+            -> Form hostinger Advance > SSH Access
+then move path to the domain and then the current root folder(we just paste)
+then run ->  php artisan migrate (all done)
+
+
+
