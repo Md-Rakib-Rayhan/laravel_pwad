@@ -1,0 +1,37 @@
+.env
+-----
+# mailing
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.gmail.com
+MAIL_PORT=465
+MAIL_USERNAME=mygoogle@gmail.com
+MAIL_PASSWORD=asdfdsfdsf
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS="mygoogle@gmail.com"
+MAIL_FROM_NAME="${APP_NAME}"
+----------
+
+
+cmd
+-----------
+php artisan make:mail DemoMail
+    -> app/Mail/DemoMail.php
+    -> Edit some data
+
+php artisan make:controller MailController
+    -> app\Http\Controllers\MailController.php
+    -> Edit some data
+
+
+On routes/web.php
+----------------
+---add 
+Route::get('mail', [MailController::class, 'index']);
+
+
+
+On views/demoMail.blade.php
+----------------
+make email template
+
+

@@ -24,3 +24,5 @@ php artisan migrate
 
 Step 7: Run the project -->
 php artisan serve
+
+npm run dev
